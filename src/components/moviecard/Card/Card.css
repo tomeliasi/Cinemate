@@ -1,0 +1,48 @@
+.card-overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  width: 13%;
+  height: 8%;
+  transition: 0.5s ease;
+  opacity: 0;
+  font-size: 15px;
+  text-align: center;
+  left: 10px;
+  top: 14px;
+}
+
+.card:hover .card-overlay {
+  opacity: 1;
+}
+
+.card {
+  display: flex;
+  width: 200px;
+  padding: 5px;
+  margin: 5px 0;
+  background-color: #282c34;
+  transition: transform 0.2s;
+  margin: 20px;
+}
+
+.card:hover {
+  background-color: white;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.card-title {
+  width: 100%;
+  text-align: center;
+  font-size: 17px;
+  padding: 9px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: larger;
+}
+
+.card-sunTitle {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 3px;
+  padding: 0 4px;
+}

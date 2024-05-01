@@ -1,0 +1,27 @@
+.center-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchbox-container {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.search-input {
+  background: rgb(255, 255, 255);
+  border: 2px solid rgb(8, 0, 0);
+  border-radius: 50px;
+  padding: 10px;
+  width: 55%;
+  height: 90%;
+}
+
+.search-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}

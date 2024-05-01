@@ -1,0 +1,53 @@
+.gallery {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  height: 550px;
+  padding-top: 30px;
+  justify-content: center;
+}
+
+.img-box {
+  height: 450px;
+  width: 150px;
+  margin: 10px;
+  border-radius: 50px;
+  background-size: auto;
+  position: relative;
+  transition: width 0.5s;
+  overflow: hidden;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.img-box h3 {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.5s, left 0.5s;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+}
+
+.img-box:hover h3 {
+  left: 10px;
+  opacity: 1;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.img-box:hover img {
+  width: 100%;
+  transform: scale(1.2);
+}
+
+.img-box:hover {
+  width: 700px;
+  cursor: pointer;
+}

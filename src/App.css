@@ -1,38 +1,239 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: rgb(1, 1, 56);
+  background: linear-gradient(
+    90deg,
+    rgba(1, 1, 56, 1) 0%,
+    rgba(1, 0, 17, 1) 50%,
+    rgba(0, 6, 60, 1) 100%
+  );
+  color: white !important;
+
+  font-family: "Poppins", sans-serif;
+}
+@font-face {
+  font-family: "DoctorGlitchFont";
+  src: url("./Fonts/DoctorGlitch.otf") format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+.main-page {
+  padding-top: 100px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.image-container {
+  position: relative;
+  transition: transform 0.2s;
+  flex: 1 0 18%; /* Adjust flex property as needed for card size */
+  box-sizing: border-box;
+  padding-top: 40px;
+}
+
+.image-container:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  width: 13%;
+  height: 8%;
+  transition: 0.5s ease;
+  opacity: 0;
+  font-size: 15px;
   text-align: center;
+  left: 10px;
+  top: 14px;
+}
+.movie-name {
+  font-family: Georgia, serif;
+  color: white;
+  font-size: 24px;
+  padding: 25px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.first-slide {
+  justify-content: center;
+  align-items: center;
+  padding: 150px;
+  font-family: "Courier New", Courier, monospace;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.nav-container {
+  height: 100px;
+  align-items: center;
+  padding: 20px 10px;
+  display: flex;
+  margin-left: auto;
+  box-shadow: 0px 10px 7.5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.search-input {
+  background: rgb(255, 255, 255);
+  border: 2px solid rgb(8, 0, 0);
+  border-radius: 50px;
+  padding: 10px;
+  width: 60%;
+  height: 90%;
+}
+
+.search-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.movie-list-display {
+  overflow: hidden;
+  .carousel-item {
+    height: 60%;
+  }
+  .carousel-indicators {
+    display: none;
+  }
+  .carousel-control-next,
+  .carousel-control-prev {
+    height: 100%; /* Adjust the height as needed */
+    width: 50px; /* Adjust the width as needed */
+    top: 0;
+    bottom: 0;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .carousel-control-next {
+    padding: 0 20px 0 0; /* Adjust padding as needed */
+  }
+
+  .carousel-control-prev {
+    padding: 0 0 0 20px; /* Adjust padding as needed */
+  }
+
+  .carousel-control-next-icon,
+  .carousel-control-prev-icon {
+    font-size: 5rem;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.background-image {
+  background: rgb(1, 1, 56);
+  background: linear-gradient(
+    90deg,
+    rgba(1, 1, 56, 1) 0%,
+    rgba(1, 0, 17, 1) 50%,
+    rgba(0, 6, 60, 1) 100%
+  );
+}
+
+.fav-components {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.model-background {
+  display: block;
+  position: initial;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.row {
+  overflow-x: auto;
+  flex-wrap: nowrap;
 }
+
+.card-list {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/* NewLIST */
+.slider-container {
+  overflow-x: hidden; /* Hide the horizontal scrollbar of the container */
+}
+.slider-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  width: 100%; /* Ensure the wrapper takes the full width of its parent */
+  max-width: 100%; /* Ensure the wrapper doesn't exceed the width of its parent */
+}
+
+/* Style the scrollbar track */
+.slider-wrapper::-webkit-scrollbar {
+  width: 20px; /* Width of the scrollbar */
+}
+
+/* Style the scrollbar thumb */
+.slider-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgb(36, 36, 201); /* Color of the thumb */
+  border-radius: 20px; /* Roundness of the thumb */
+}
+
+
+.slider-wrapper::-webkit-scrollbar-track {
+  background: transparent; /* Transparent background */
+}
+
+.slider-list {
+  display: flex;
+  flex-direction: row;
+  padding: 10px; /* Add padding if needed */
+
+}
+
+.slider-item {
+  flex: 0 0 auto;
+  margin-right: 10px; /* adjust as needed */
+}
+
+.fav-heading
+{
+  margin-left: 30px;
+  margin-top: 20px;
+  font-size: xx-large;
+}
+
+.elements-container
+{
+  margin-left: 100px;
+}
+.elementscontainer > .row
+{
+  flex-wrap: nowrap;
+}
+
+.custom-dot-list {
+  padding-top: 20px; /* Adjust the padding-top value as needed */
+}
+
+.carousel-container 
+{
+  display: flex;
+}
+
+
+

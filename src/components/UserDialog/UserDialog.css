@@ -1,0 +1,28 @@
+/* UserDialog.css */
+
+.main-details-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+}
+
+.user-details {
+  text-align: left; /* Adjust text alignment as needed */
+}
+
+.user-detail {
+  margin-bottom: 10px; /* Add margin between user details */
+  color: black;
+}
+
+.custom-user-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close-button
+{
+    
+}

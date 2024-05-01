@@ -1,0 +1,1 @@
+export {CarouselMovies} from './CarouselMovies';

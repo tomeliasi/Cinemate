@@ -1,0 +1,1 @@
+export {MovieCategories} from './MovieCategories';

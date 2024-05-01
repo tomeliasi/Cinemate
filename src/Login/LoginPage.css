@@ -1,0 +1,82 @@
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .login-section {
+    width: 80%; /* Adjust the width for smaller screens */
+  }
+}
+
+/* Responsive styles for larger screens */
+@media (min-width: 1024px) {
+  .login-section {
+    width: 25%; /* Adjust the width for larger screens */
+  }
+}
+
+
+.background-login-page {
+  background: url("../images/login-background.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-section {
+  height:auto;
+  box-sizing: border-box;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.29);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: auto;
+}
+
+.login-inputbox {
+  display: flex;
+  flex-direction:column;
+  margin-top: 20px;
+  width: 300px;
+}
+
+.login-section h3 {
+  color: white;
+}
+
+.inputs-section {
+  padding-top: 2px;
+  padding-left: 30px;
+}
+
+.login-button-section {
+  padding-top: 30px;
+}
+
+.login-button {
+  border-radius: 30%;
+}
+.login-error {
+  display: flex; /* Add this to enable flexbox layout */
+  align-items: center;
+  padding-top: 10px;
+  margin-top: 25px;
+  border-radius: 5px;
+  color: #d8000c;
+  background-color: #ffbaba;
+  background-image: url("https://i.imgur.com/GnyDvKN.png");
+  background-repeat: no-repeat;
+  background-position: left center; /* Set the background position to the left */
+  padding-left: 40px; /* Add some padding to the left to prevent text overlap with the image */
+}
+
+
+.login-header {
+  margin-top: 20px;
+}
+
+.login-option {
+  text-decoration: none;
+}
