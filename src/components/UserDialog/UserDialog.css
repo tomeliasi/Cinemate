@@ -8,11 +8,11 @@
 }
 
 .user-details {
-  text-align: left; /* Adjust text alignment as needed */
+  text-align: left; 
 }
 
 .user-detail {
-  margin-bottom: 10px; /* Add margin between user details */
+  margin-bottom: 10px;
   color: black;
 }
 
@@ -22,7 +22,4 @@
   justify-content: center;
 }
 
-.modal-close-button
-{
-    
-}
+

@@ -18,7 +18,6 @@ const UserDialog = ({ showModal, handleClose, user }) => {
             <p className="user-detail">Last Name: {user.lastName}</p>
             <p className="user-detail">Email: {user.email}</p>
             <p className="user-detail"> Register Date: {user.registerDate}</p>
-            {console.log("user from usermodal  = ",user)}
           </div>
           <div className="modal-close-button">
             <Button

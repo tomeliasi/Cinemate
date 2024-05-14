@@ -1,14 +1,14 @@
 /* Responsive styles for smaller screens */
 @media (max-width: 768px) {
   .login-section {
-    width: 80%; /* Adjust the width for smaller screens */
+    width: 80%; 
   }
 }
 
 /* Responsive styles for larger screens */
 @media (min-width: 1024px) {
   .login-section {
-    width: 25%; /* Adjust the width for larger screens */
+    width: 25%; 
   }
 }
 
@@ -46,10 +46,7 @@
   color: white;
 }
 
-.inputs-section {
-  padding-top: 2px;
-  padding-left: 30px;
-}
+
 
 .login-button-section {
   padding-top: 30px;
@@ -59,7 +56,7 @@
   border-radius: 30%;
 }
 .login-error {
-  display: flex; /* Add this to enable flexbox layout */
+  display: flex; 
   align-items: center;
   padding-top: 10px;
   margin-top: 25px;
@@ -68,8 +65,8 @@
   background-color: #ffbaba;
   background-image: url("https://i.imgur.com/GnyDvKN.png");
   background-repeat: no-repeat;
-  background-position: left center; /* Set the background position to the left */
-  padding-left: 40px; /* Add some padding to the left to prevent text overlap with the image */
+  background-position: left center; 
+  padding-left: 40px; 
 }
 
 

@@ -1,10 +1,9 @@
-
-import React, { useState,useEffect } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import "./Signup.css";
-import { auth, app, db } from "../services/FirebaseService";
-import { useNavigate } from "react-router-dom";
-import { doc, setDoc, addDoc, collection, getDoc } from "firebase/firestore";
+import { auth, db } from "../services/FirebaseService";
+import { useNavigate, Link } from "react-router-dom";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { avatar1, avatar2, avatar3, avatar4, avatar5 } from "../images/avatars";
 const SignUpPage = () => {
   const [email, setEmail] = useState("");
@@ -13,92 +12,97 @@ const SignUpPage = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [avatar, setAvatar] = useState();
-  const [errors,setErrors] = useState([]);
+  const [errors, setErrors] = useState({
+    firstNameError: false,
+    lastNameError: false,
+    emailError: false,
+    passwordError: false,
+    avatarError: false,
+  });
   const navigate = useNavigate("");
+  const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5];
+  const emptyInputCheck = () => {
+    let newErrors = { ...errors };
+    let errorsNumber = 0;
 
- const emptyInputErrors = {
-  firstNameError: "Please enter First-Name",
-  lastNameError: "Please enter Last-Name",
-  emailError: "Please Enter Email",
-  passwordError: "Enter a password",
-  avatarError: "Choose an Avatar",
-};
-
-const errorsCheck = (firstName, lastName, password, email, avatar) => {
-  const errors = [];
-
-  if (!firstName) {
-    errors.push(emptyInputErrors.firstNameError);
-  }
-
-  if (!lastName) {
-    errors.push(emptyInputErrors.lastNameError);
-  }
-
-  if (!email) {
-    errors.push(emptyInputErrors.emailError);
-  }
-
-  if (!password) {
-    errors.push(emptyInputErrors.passwordError);
-  }
-
-  if (!avatar) {
-    errors.push(emptyInputErrors.avatarError);
-  }
-
-  return errors;
-};
-const signUp = async (e) => {
-  e.preventDefault();
-
-   console.log("errors : ", errors);
-
-  if (errors.length === 0) {
-    try {
-      // Create user in Firebase Authentication
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-      // Add user details to Firestore
-      const userDocRef = doc(db, "users", userCredential.user.uid);
-      await setDoc(userDocRef, {
-        uid: userCredential.user.uid,
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        registerDate: userCredential.user.metadata.creationTime,
-        avatar: avatar,
-         Favourites: [],
-         FavouritesMovies:[],
-         FavouritesTVShows:[],
-      });
-
-      
-      //  const userCollectionRef = collection(userDocRef, "Favourites"); // "newCollection" is the name of your new collection
-      // await addDoc(userCollectionRef, {
-   
-      // });
-      // See the unique id (UID)
-      console.log("User and details added successfully to Firestore!", userCredential.user.uid);
-
-      const userDoc = await getDoc(userDocRef);
-
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
-        console.log("User details:", userData);
-      } else {
-        console.error("User document not found in Firestore.");
-      }
-      setSignInMassage(true);
-      navigate("/Movies");
-    } catch (error) {
-      console.error("Error signing up:", error.message);
-      setSignInMassage(false);
+    if (!avatar) {
+      newErrors.avatarError = true;
+      errorsNumber++;
     }
-  } else {
-    // Handle errors, if any
-  }
-};
+    if (firstName === "") {
+      newErrors.firstNameError = true;
+      errorsNumber++;
+    }
+
+    if (lastName === "") {
+      newErrors.lastNameError = true;
+      errorsNumber++;
+    }
+
+    if (email === "") {
+      newErrors.emailError = true;
+      errorsNumber++;
+    }
+
+    if (password === "") {
+      newErrors.passwordError = true;
+      errorsNumber++;
+    }
+    setErrors(newErrors);
+
+    return errorsNumber;
+  };
+
+  const clearErrors = () => {
+    setErrors(false);
+  };
+
+  const signUp = async (e) => {
+    e.preventDefault();
+    if (emptyInputCheck() == 0) {
+      try {
+        // Create user in Firebase Authentication
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        // Add user details to Firestore
+        const userDocRef = doc(db, "users", userCredential.user.uid);
+        await setDoc(userDocRef, {
+          uid: userCredential.user.uid,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          registerDate: userCredential.user.metadata.creationTime,
+          avatar: avatar,
+          Favourites: [],
+          FavouritesMovies: [],
+          FavouritesTVShows: [],
+        });
+        // See the unique id (UID)
+        console.log(
+          "User and details added successfully to Firestore!",
+          userCredential.user.uid
+        );
+
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          // console.log("User details:", userData);
+        } else {
+          console.error("User document not found in Firestore.");
+        }
+        setSignInMassage(true);
+        navigate("/Movies");
+      } catch (error) {
+        console.error("Error signing up:", error.message);
+        setSignInMassage(false);
+      }
+    }
+  };
 
   return (
     <div className="background-login-page main-page">
@@ -108,11 +112,10 @@ const signUp = async (e) => {
           <p>
             Already a user?
             <span>
-              <a className="login-option" href="/Login">
-                {" "}
-                Log in
-              </a>
-            </span>{" "}
+              <Link to={"/Login"} className="login-option">
+                Log In
+              </Link>
+            </span>
           </p>
         </div>
         <div className="inputs-section">
@@ -121,7 +124,9 @@ const signUp = async (e) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="login-inputbox"
+            className={`login-inputbox ${
+              errors.emailError ? "empty-input" : ""
+            }`}
           />
 
           <input
@@ -129,7 +134,9 @@ const signUp = async (e) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            className="login-inputbox"
+            className={`login-inputbox ${
+              errors.passwordError ? "empty-input" : ""
+            }`}
           />
 
           <input
@@ -137,7 +144,9 @@ const signUp = async (e) => {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             placeholder="First Name"
-            className="login-inputbox"
+            className={`login-inputbox ${
+              errors.firstNameError ? "empty-input" : ""
+            }`}
           />
 
           <input
@@ -145,36 +154,41 @@ const signUp = async (e) => {
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             placeholder="Last Name"
-            className="login-inputbox"
+            className={`login-inputbox ${
+              errors.lastNameError ? "empty-input" : ""
+            }`}
           />
 
           <div className="signup-avatar-choose ">
             <p className="avatar-choosing ">Choose an Avatar</p>
             <div className="avatars-section">
-              <img className="avatar-img" onClick={() => setAvatar(1)} src={avatar1}></img>
-              <img className="avatar-img" onClick={() => setAvatar(2)} src={avatar2}></img>
-              <img className="avatar-img" onClick={() => setAvatar(3)} src={avatar3}></img>
-              <img className="avatar-img" onClick={() => setAvatar(4)} src={avatar4}></img>
-              <img className="avatar-img" onClick={() => setAvatar(5)} src={avatar5}></img>
+              {avatars.map((currAvatar, index) => (
+                <img
+                  className={`avatar-img ${
+                    index + 1 === avatar && "selected-avatar"
+                  }`}
+                  alt={currAvatar}
+                  onClick={() => setAvatar(index + 1)}
+                  src={currAvatar}
+                ></img>
+              ))}
             </div>
           </div>
+          <p className="error-message">
+            {errors.avatarError ? "Please choose an avatar" : ""}
+          </p>
           <div className="signup-status">
-  {errors.length > 0 && (
-    <div className="error-messages">
-      {errors.map((error, index) => (
-        <p key={index} className="error-message">
-          {error}
-        </p>
-      ))}
-    </div>
-  )}
-  {signInMassage && <p className="signup-massage"> Signup successfully! </p>}
-</div>
-
-          
+            {signInMassage && (
+              <p className="signup-massage"> Signup successfully! </p>
+            )}
+          </div>
         </div>
         <div className="login-button-section">
-          <button className="login-button" type="submit" onClick={ () => setErrors(errorsCheck(firstName, lastName, password, email, avatar))}>
+          <button
+            className="login-button"
+            type="submit"
+            onClick={() => clearErrors()}
+          >
             Sign Up
           </button>
         </div>

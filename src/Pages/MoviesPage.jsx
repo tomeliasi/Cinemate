@@ -1,7 +1,6 @@
-import "../App.css";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {ListHeader} from "../components/ListHeader";
+import { ListHeader } from "../components/ListHeader";
 import { CarouselMovies } from "../components/CarouselMovies";
 import {
   DiscoverMovies,
@@ -10,23 +9,13 @@ import {
   ActionMovies,
   HorrorMovies,
 } from "../services/MovieService";
-import { DiscoverSeries } from "../services/SeriesService";
-import { useFavourites } from "../services/FavouritesContext";
+
 import { Loader } from "../Loader";
-import { MovieCategories } from "../components/MovieCategories";
-import { List} from "../services/MultiService";
-import { NewList } from "../services/NewList";
-import { UserExistCheck } from "../services/FirebaseService";
 import { FinalList } from "../services/FinalList";
-const HomePage = () => {
-  const [movies, setMovies] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [historymovies, setHistoryMovie] = useState([]);
+const MoviesPage = () => {
   const [discoveredMovies, setDiscoveredMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
-  const { favourites, addFavourite, removeFavourite } = useFavourites();
-  const [CategoryType, setCategoryType] = useState("discover");
   const [actionMovies, setActionMovies] = useState([]);
   const [horrorMovies, setHorrorMovies] = useState([]);
 
@@ -42,7 +31,6 @@ const HomePage = () => {
 
     fetchDiscoveredMovies();
   }, []);
-
 
   useEffect(() => {
     const fetchUpcomingMovies = async () => {
@@ -95,24 +83,6 @@ const HomePage = () => {
 
     fetchHorrorMovies();
   }, []);
-
-  const handleCategorySelect = (categoryType) => {
-    setCategoryType(categoryType);
-  };
-
-  const getMovieType = (type) => {
-    switch (type) {
-      case "upcoming":
-        return upcomingMovies;
-      case "discover":
-        return discoveredMovies;
-      case "trending":
-        return trendingMovies;
-      default:
-        return [];
-    }
-  };
-
   return (
     <div className="main-page">
       {discoveredMovies?.length && upcomingMovies?.length ? (
@@ -120,34 +90,17 @@ const HomePage = () => {
           <div className="carousel-movie">
             <CarouselMovies movies={upcomingMovies.slice(0, 7)} />
           </div>
-
-          {/* <div>
-            <MovieCategories onSelectCategory={handleCategorySelect} />
-          </div>
-          <div className="row">
-            {CategoryType === null ? (
-              ""
-            ) : (
-              <List
-                elements={getMovieType(CategoryType)}
-                handleOnClick={addFavourite}
-                isFavourite={false}
-              />
-            )}
-          </div> */}
           <ListHeader heading="Action" />
           <FinalList
-            elements={actionMovies.slice(0,12)}
-            handleOnClick={addFavourite}
+            elements={actionMovies.slice(0, 12)}
             isFavourite={false}
-            favouritesOption = {UserExistCheck}
+            
           />
           <ListHeader heading="Horror" />
-          <List
-            elements={horrorMovies}
-            handleOnClick={addFavourite}
+          <FinalList
+            elements={horrorMovies.slice(1, 13)}
             isFavourite={false}
-            showFavourites = {false}
+            
           />
         </div>
       ) : (
@@ -156,4 +109,7 @@ const HomePage = () => {
     </div>
   );
 };
-export default HomePage;
+export default MoviesPage;
+
+
+

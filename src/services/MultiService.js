@@ -16,29 +16,6 @@ const MultiSearch = async (searchValue) => {
   return response.data;
 };
 
-const elementDetails = (responseData) => {
-  const {
-    id,
-    title,
-    poster_path,
-    backdrop_path,
-    original_title,
-    release_date,
-    vote_average,
-    name,
-  } = responseData;
-  return {
-    id,
-    title,
-    poster_path,
-    backdrop_path,
-    original_title,
-    release_date,
-    vote_average,
-    name,
-  };
-};
-
 const getExternalIDS = async (elementID, type) => {
   let url;
   if (type == "series") {
@@ -115,17 +92,20 @@ const List = ({ elements, handleOnClick, isFavourite }) => {
   const handleSelect = (selectedIndex) => {
     setCurrentPage(selectedIndex);
   };
-
   const renderCarouselItems = () => {
     const totalItems = Math.ceil(elements.length / elementsPerPage);
 
-    return Array.from({ length: totalItems }).map((_, index) => (
-      <Carousel.Item key={index} className="custom-carousel-item">
+    return Array.from({ length: totalItems }).map((_, pageIndex) => (
+      <Carousel.Item key={pageIndex} className="custom-carousel-item">
         <div className="card-list">
           {elements
-            .slice(index * elementsPerPage, (index + 1) * elementsPerPage)
+            .slice(
+              pageIndex * elementsPerPage,
+              (pageIndex + 1) * elementsPerPage
+            )
             .map((element, elementIndex) => (
               <Card
+                key={pageIndex * elementsPerPage + elementIndex} // Generate unique key
                 element={element}
                 CardHandleOnClick={handleOnClick}
                 favComponent={isFavourite}
@@ -186,22 +166,17 @@ const getYoutubeKey = async (element) => {
         break;
 
       default:
-        // Handle the case when no matching trailer is found
         trailer = null;
         break;
     }
 
     if (trailer && trailer.key) {
-      //console.log(trailer.key);
-      // console.log(trailer);
       return trailer.key; // Return the YouTube video key
     } else {
-      // Handle the case where no trailer is found
-      console.log("No trailer found for this movie.");
+      // console.log("No trailer found for this movie.");
       return null;
     }
   } catch (error) {
-    // Handle errors, log to console for now
     console.error("Error fetching data:", error);
     return null;
   }
