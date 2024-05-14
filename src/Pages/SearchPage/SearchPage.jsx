@@ -1,8 +1,8 @@
 import { React, useEffect, useState } from "react";
-import { List } from "../../services/MultiService";
+
+import { FinalList } from "../../services/FinalList";
 import { SearchBox } from "../../components/SearchBox";
-import {ListHeader} from "../../components/ListHeader";
-import { useFavourites } from "../../services/FavouritesContext";
+import { ListHeader } from "../../components/ListHeader";
 import { MultiSearch } from "../../services/MultiService"; // Assuming MultiSearch is properly exported
 import "./SearchPage.css";
 import { useParams } from "react-router-dom";
@@ -10,17 +10,15 @@ import { Loader } from "../../Loader";
 
 const SearchPage = () => {
   const [movies, setMovies] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-  const { addFavourite } = useFavourites();
   const [resultStatus, setResultsStatus] = useState(true);
   const { query } = useParams(); // Fix the typo here
 
   useEffect(() => {
     getDataBySearch();
-  }, [query]); // Use the query parameter in the dependency array
+  }, [query]); // The query parameter in the dependency array
 
   const getDataBySearch = async () => {
-    const movies = await MultiSearch(query); // Use the query parameter here
+    const movies = await MultiSearch(query);
     const filteredMovies = movies.results.filter(
       (movie) => movie.poster_path && movie.backdrop_path
     );
@@ -31,18 +29,12 @@ const SearchPage = () => {
   };
 
   return (
-    <div className="search-page-container main-page">
+    <div className="main-page">
       {movies.length ? (
         <>
           <ListHeader heading={`Results For : ${query}`} />
           {resultStatus ? (
-            <div className="row">
-              <List
-                elements={movies}
-                handleOnClick={addFavourite}
-                isFavourite={false}
-              />
-            </div>
+            <FinalList elements={movies} isFavourite={false} />
           ) : (
             <div className="search-not-found">Movies not found</div>
           )}

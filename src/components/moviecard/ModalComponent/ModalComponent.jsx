@@ -6,15 +6,8 @@ import YoutubeIcon from "../../../images/youtube-icon.png";
 import "./ModalComponent.css";
 import YouTube from "react-youtube";
 import { getYoutubeKey, getExternalIDS } from "../../../services/MultiService";
-import {
-  InstagramLogo,
-  facebookLogo,
-  twitterLogo,
-  IMDBLogo,
-} from "./SocialLogos";
 
 import { ExternalSocials } from "./ExternalSocials";
-import { experimentalSetDeliveryMetricsExportedToBigQueryEnabled } from "firebase/messaging/sw";
 
 const ModalComponent = (props) => {
   const { show, handleClose, element } = props;
@@ -33,7 +26,7 @@ const ModalComponent = (props) => {
 
   useEffect(() => {
     const fetchExternalIDS = async () => {
-      const iDS = await getExternalIDS(props.element.id,checkElementType());
+      const iDS = await getExternalIDS(props.element.id, checkElementType());
       setExternalIDS(iDS);
     };
 
@@ -58,12 +51,10 @@ const ModalComponent = (props) => {
     setPlayerTrailer(false);
   };
 
-const checkElementType = () => {
-  if (element.title)
-    return ('movie')
-  else
-    return ('series')
-}
+  const checkElementType = () => {
+    if (element.title) return "movie";
+    else return "series";
+  };
 
   return (
     <Modal
@@ -102,8 +93,7 @@ const checkElementType = () => {
                 {new Date(element?.first_air_date).getFullYear()}){" "}
               </h3>
             )}
-           <ExternalSocials ID={element.id} elementType={checkElementType()} />
-
+            <ExternalSocials ID={element.id} elementType={checkElementType()} />
           </div>
           {!playTrailer ? (
             <>

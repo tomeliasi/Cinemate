@@ -30,7 +30,7 @@ const ExternalSocials = (props) => {
           <img
             className="social-img"
             src={facebookLogo}
-            onClick={() => console.log(externalIDS.facebook_id)}
+            // onClick={() => console.log(externalIDS.facebook_id)}
           />
         </a>
       )}
@@ -42,7 +42,7 @@ const ExternalSocials = (props) => {
           <img
             className="social-img"
             src={InstagramLogo}
-            onClick={() => console.log(externalIDS.instagram_id)}
+            // onClick={() => console.log(externalIDS.instagram_id)}
           />
         </a>
       )}
@@ -54,7 +54,7 @@ const ExternalSocials = (props) => {
           <img
             className="social-img"
             src={twitterLogo}
-            onClick={() => console.log(externalIDS.twitter_id)}
+            // onClick={() => console.log(externalIDS.twitter_id)}
           />
         </a>
       )}
@@ -66,7 +66,7 @@ const ExternalSocials = (props) => {
           <img
             className="social-img"
             src={IMDBLogo}
-            onClick={() => console.log(externalIDS.imdb_id)}
+            // onClick={() => console.log(externalIDS.imdb_id)}
           />
         </a>
       )}

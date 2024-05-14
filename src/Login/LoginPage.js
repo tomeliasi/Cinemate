@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { auth, app,db,getUserDetails,addUserToLocalStorage } from "../services/FirebaseService";
 import "./LoginPage.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -13,13 +13,11 @@ const LoginPage = () => {
 
   const signIn = (e) => {
     e.preventDefault();
-    console.log(email, password); // Add this line to check values
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
         const userdetails = getUserDetails(userCredential.user.uid);
-        addUserToLocalStorage(userCredential.user.uid);
-        console.log("user details by function : ",userdetails); //working.
+        addUserToLocalStorage(userCredential.user.uid); 
         navigate("/Movies");
         setLoginError(true);
       })
@@ -37,8 +35,8 @@ const LoginPage = () => {
         <p>
           New user?
           <span>
-            <a className="login-option" href="/Signup"> Sign Up</a>
-          </span>{" "}
+           <Link to={"/SignUp"} className="login-option"> SignUp</Link>
+          </span>
         </p>
         </div>
         

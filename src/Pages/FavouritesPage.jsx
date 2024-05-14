@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { List, getElementById } from "../services/MultiService";
 import { ListHeader } from "../components/ListHeader";
-import { getCurrentUser, removeFavouritesFromLocalStorage } from "../services/FirebaseService";
+import {
+  getCurrentUser,
+  removeFavouritesFromLocalStorage,
+} from "../services/FirebaseService";
 
 const FavouritesPage = () => {
   const [favorites, setFavorites] = useState([]);
@@ -12,8 +15,10 @@ const FavouritesPage = () => {
       setLoading(true);
 
       // Get favorite IDs from local storage
-      const movieFavoritesIds = JSON.parse(localStorage.getItem("FavouritesMovies")) || [];
-      const tvShowFavoritesIds = JSON.parse(localStorage.getItem("FavouritesTVShows")) || [];
+      const movieFavoritesIds =
+        JSON.parse(localStorage.getItem("FavouritesMovies")) || [];
+      const tvShowFavoritesIds =
+        JSON.parse(localStorage.getItem("FavouritesTVShows")) || [];
 
       // Fetch movie and TV show data using the IDs
       const movieFavorites = await Promise.all(
@@ -29,21 +34,25 @@ const FavouritesPage = () => {
           return tvShowData;
         })
       );
-      setFavorites([...movieFavorites, ...tvShowFavorites].filter((item) => item !== null));
+      setFavorites(
+        [...movieFavorites, ...tvShowFavorites].filter((item) => item !== null)
+      );
       setLoading(false);
     };
 
     fetchFavorites();
   }, []);
 
- 
-
   return (
     <div className="main-page">
       {favorites.length > 0 ? (
         <div>
           <h3 className="fav-heading">Your Favorites</h3>
-          <List elements={favorites} isFavourite={true} handleOnClick={removeFavouritesFromLocalStorage}/>
+          <List
+            elements={favorites}
+            isFavourite={true}
+            handleOnClick={removeFavouritesFromLocalStorage}
+          />
         </div>
       ) : (
         <ListHeader heading="No favorites yet..." />

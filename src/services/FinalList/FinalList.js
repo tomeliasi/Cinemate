@@ -2,16 +2,16 @@ import axios from "axios";
 import { useState } from "react";
 import { Card } from "../../components/moviecard/Card";
 import "./FinalList.css";
+import { UserExistCheck } from "../FirebaseService";
 
 const FinalList = ({
   elements,
   handleOnClick,
   isFavourite,
-  favouritesOption,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedElement, setSelectedElement] = useState(null);
-  //const [FavouritesOption,setFavouritesOption] = useState(true);
+  const favOption = UserExistCheck();
 
   const openModal = (element) => {
     setShowModal(true);
@@ -31,6 +31,7 @@ const FinalList = ({
             element={element}
             CardHandleOnClick={handleOnClick}
             favComponent={isFavourite}
+            favOption = {favOption}
             imgClick={() => imgHandleOnClick(element)}
           />
         ))}

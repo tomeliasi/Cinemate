@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Carousel } from "react-bootstrap";
 import { ModalComponent } from "../moviecard/ModalComponent";
-import './CarouselMovies.css';
+import "./CarouselMovies.css";
 
 const CarouselMovies = (props) => {
   const [index, setIndex] = useState(0);
@@ -29,9 +29,15 @@ const CarouselMovies = (props) => {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} className="main-carousel" interval={3500} fade={true} >
+    <Carousel
+      activeIndex={index}
+      onSelect={handleSelect}
+      className="main-carousel"
+      interval={3500}
+      fade={true}
+    >
       {props.movies?.map((movie, idx) => (
-        <Carousel.Item key={idx} className="carousel-item" >
+        <Carousel.Item key={idx} className="carousel-item">
           <img
             className="carousel-movie-img"
             src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
@@ -40,7 +46,12 @@ const CarouselMovies = (props) => {
           <Carousel.Caption className="carousel-caption">
             <div className="carousel-movie-details">
               <h3 className="element-title">{movie?.title}</h3>
-              <button className="details-button" onClick={() => itemHandleOnClick(movie, idx)}>Details</button>
+              <button
+                className="details-button"
+                onClick={() => itemHandleOnClick(movie, idx)}
+              >
+                Details
+              </button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>

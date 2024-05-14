@@ -11,7 +11,6 @@ const toprated = `/tv/top_rated?api_key=${api_key}&language=en-US`;
 const topratedurl = baseurl + toprated;
 const trending = `${baseurl}/trending/tv/week?language=en-US&api_key=${api_key}`;
 
-
 const TrandingSeries = async () => {
   try {
     const response = await axios.get(trending);
@@ -51,4 +50,4 @@ const TopRated = async () => {
   }
 };
 
-export { PopularSeries, DiscoverSeries, TopRated, TrandingSeries};
+export { PopularSeries, DiscoverSeries, TopRated, TrandingSeries };
