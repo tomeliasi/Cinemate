@@ -57,9 +57,11 @@ const LoginPage = () => {
               placeholder="Password"
               className="login-inputbox"
             />
-          {loginError && (
-            <div className="login-error">Email or Password is invalid</div>
+            <div className="optional-login-error-section">
+                        {loginError && (
+            <p className="login-error">Email or Password is invalid</p>
           )}
+            </div>
         </div>
         <div className="login-button-section">
           <button type="submit" className="login-button">

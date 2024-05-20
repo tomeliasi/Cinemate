@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -9,7 +10,6 @@ import NavbarMainLogo from "../../images/cinemate-logo.png";
 import "./Navbar.css";
 import { Badge } from "@mui/material";
 import { SearchBox } from "../SearchBox";
-import { useState, useEffect, React } from "react";
 import { getFirestore, getDoc, doc } from "firebase/firestore";
 import {
   db,
@@ -26,13 +26,14 @@ import {
   avatar5,
 } from "../../images/avatars";
 import { UserDialog } from "../UserDialog/UserDialog";
-import "../UserDialog/UserDialog.css";
+import { ResponsiveNavbar } from "./ResponsiveNavbar";
+
 const Navbar = ({ user }) => {
   const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate("");
   const [searchInput, setSearchInput] = useState("");
   const [userShowModal, setUserShowModal] = useState(false);
-
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1100);
 
   const openModal = () => {
     setUserShowModal(true);
@@ -66,6 +67,33 @@ const Navbar = ({ user }) => {
     fetchUserData();
   }, [user]);
 
+  const handleSignOut = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        console.log("User signed out successfully");
+        removeUserFromLocalStorage(user.uid);
+        removeFavouritesFromLocalStorage();
+        navigate("/Login");
+        setUserInfo(null);
+      })
+      .catch((error) => {
+        console.error("Error signing out:", error.message);
+      });
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 930);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const avatarFetch = (avatarNumber) => {
     switch (avatarNumber) {
       case 1:
@@ -83,67 +111,58 @@ const Navbar = ({ user }) => {
     }
   };
 
-  const handleSignOut = () => {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        console.log("User signed out successfully");
-        removeUserFromLocalStorage(user.uid);
-        removeFavouritesFromLocalStorage();
-        navigate("/Login");
-        setUserInfo(null);
-      })
-      .catch((error) => {
-        console.error("Error signing out:", error.message);
-      });
-  };
-
   return (
     <nav className="nav-container">
       <img className="nav-logo" src={NavbarMainLogo} alt="logo" />
-      <div className="nav-categories">
-        <Link to="/Movies" className="category">
-          Movies
-        </Link>
-        <Link to="/Series" className="category">
-          Series
-        </Link>
-        <Link to="/About" className="category">
-          About
-        </Link>
-        {user ? <Link to="/Favourites" className="category">Favourites</Link> : null}
-      </div>
-      <div className="search-section">
-        <SearchBox searchValue={searchInput} setSearchValue={setSearchInput} />
-      </div>
-      <div className="login-categories">
-        {userInfo ? (
-          <div className="user-info" onClick={openModal}>
-            <img
-              className="avatar-user"
-              src={avatarFetch(userInfo.avatar)}
-            ></img>
-            <p className="username-display">
-              Hello {userInfo.firstName} {userInfo.lastName}
-            </p>
-            <button
-              className="user-button logout-button"
-              onClick={handleSignOut}
-            >
-              Log Out
-            </button>
+      {isMobile ? (
+        <ResponsiveNavbar user={user} userInfo={userInfo} handleSignOut={handleSignOut} />
+      ) : (
+        <>
+          <div className="nav-categories">
+            <Link to="/Movies" className="category">
+              Movies
+            </Link>
+            <Link to="/Series" className="category">
+              Series
+            </Link>
+            <Link to="/About" className="category">
+              About
+            </Link>
+            {user ? <Link to="/Favourites" className="category">Favourites</Link> : null}
           </div>
-        ) : (
-          <>
-            <Link to="/Login" className="user-button">
-              Login
-            </Link>
-            <Link to="/Signup" className="user-button">
-              Sign Up
-            </Link>
-          </>
-        )}
-      </div>
+          <div className="search-section">
+            <SearchBox searchValue={searchInput} setSearchValue={setSearchInput} />
+          </div>
+          <div className="login-categories">
+            {userInfo ? (
+              <div className="user-info" onClick={openModal}>
+                <img
+                  className="avatar-user"
+                  src={avatarFetch(userInfo.avatar)}
+                ></img>
+                <p className="username-display">
+                  Hello {userInfo.firstName} {userInfo.lastName}
+                </p>
+                <button
+                  className="user-button logout-button"
+                  onClick={handleSignOut}
+                >
+                  Log Out
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link to="/Login" className="user-button">
+                  Login
+                </Link>
+                <Link to="/Signup" className="user-button">
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+        </>
+      )}
       {userShowModal && userInfo && (
         <UserDialog
           showModal={userShowModal}

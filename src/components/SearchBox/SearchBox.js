@@ -20,7 +20,7 @@ const SearchBox = (props) => {
   };
 
   return (
-    <div className="center-container">
+
       <div className="searchbox-container">
         <input
           id="searchInput"
@@ -42,7 +42,6 @@ const SearchBox = (props) => {
           </svg>
         </button>
       </div>
-    </div>
   );
 };
 

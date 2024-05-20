@@ -9,7 +9,7 @@
 
 .login-section {
   height: auto;
-  width: auto;
+  width: 25%;
   box-sizing: border-box;
   text-align: center;
   justify-content: center;
@@ -51,14 +51,6 @@
   padding-inline: 20px;
 }
 
-.login-error {
-  align-items: center;
-  padding-top: 10px;
-  color: #d8000c;
-  background-color: #ffbaba;
-  background-image: url("https://i.imgur.com/GnyDvKN.png");
-  background-repeat: no-repeat;
-}
 .login-header {
   margin-top: 20px;
 }
@@ -70,16 +62,29 @@
 /* Responsive styles for smaller screens */
 @media (max-width: 768px) {
   .login-section {
-    width: 80%; 
+    width: 80%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .login-section {
+    width: 40%;
+  }
+}
+
+@media (max-width: 500px) {
+  .login-section {
+    width: 80%;
+  }
+}
+
+@media (max-width: 750px) {
+  .login-section {
+    width: 70%;
   }
 }
 
 /* Responsive styles for larger screens */
-@media (min-width: 1024px) {
-  .login-section {
-    width: 25%; 
-  }
-}
 
 .login-button-section {
   position: relative;
@@ -120,7 +125,7 @@
 
 .avatars-section {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -184,5 +189,5 @@
 }
 
 .empty-input {
-  outline: 2px solid #d8000c; 
+  outline: 2px solid #d8000c;
 }

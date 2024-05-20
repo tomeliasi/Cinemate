@@ -11,7 +11,6 @@
   height: auto;
 }
 
-
 .custom-modal {
   display: flex;
   align-items: center;
@@ -48,7 +47,7 @@
   width: 100%;
   height: 100%;
   background-size: cover;
-  border-radius:6px;
+  border-radius: 6px;
 }
 
 .modal-close-button {
@@ -92,9 +91,42 @@
   width: 95%;
 }
 
-
 .element-overview {
   padding-left: 10px;
-
 }
 
+@media screen and (max-width: 1000px) {
+  /* .modal-body {
+    height: 550px;
+  } */
+
+  .modal-details {
+    height: 35%;
+  }
+
+  .modal-img {
+    object-fit: cover;
+  }
+
+  .element-overview {
+    display: none;
+  }
+
+  .modal-content,
+  .custom-modal-content {
+    height: 500px;
+    width: 1300px;
+  }
+
+  .modal-details-header {
+    flex-direction: column;
+  }
+
+  .modal-rating {
+    display: none;
+  }
+  .trailer-button {
+    margin-top: 90px;
+    margin-left: 10px;
+  }
+}
