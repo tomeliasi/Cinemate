@@ -1,0 +1,56 @@
+.responsive-navbar-container {
+  position: relative;
+}
+
+.transparent-div
+{
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.337);
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.menu-img {
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.responsive-navbar-categories {
+  position: absolute;
+  top: calc(100%);
+  right: 5px;
+  z-index: 100;
+  background: rgba(13, 43, 229, 0.38);
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.5px);
+  -webkit-backdrop-filter: blur(4.5px);
+  width: 140px;
+}
+
+.responsive-navbar-categories ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+  justify-content: center;
+
+}
+
+.responsive-navbar-categories li {
+  margin-bottom: 10px;
+  width: auto;
+  padding: 10px;
+  justify-content: center;
+}
+
+.responsive-navbar-categories .category {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 0;
+  text-align: end;
+}
