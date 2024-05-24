@@ -3,6 +3,7 @@
   width: auto;
   height: auto;
   background-color: transparent;
+  padding: 7px;
 }
 
 .custom-modal-content {
@@ -48,6 +49,7 @@
   height: 100%;
   background-size: cover;
   border-radius: 6px;
+  object-fit: cover;
 }
 
 .modal-close-button {
@@ -96,12 +98,13 @@
 }
 
 @media screen and (max-width: 1000px) {
-  /* .modal-body {
+  .modal-body {
     height: 550px;
-  } */
+    width: 660px;
+  }
 
   .modal-details {
-    height: 35%;
+    height: 25%;
   }
 
   .modal-img {
@@ -109,24 +112,100 @@
   }
 
   .element-overview {
+    font-size: small;
+  }
+
+  .modal-rating {
+    .vote-rating {
+      font-size: 15px;
+    }
+
+    .rating-star-image {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  .trailer-button {
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .modal-body {
+    height: 600px;
+  }
+
+  .modal-close-button {
+    margin-bottom: 5px;
+  }
+
+  .modal-img {
+    object-fit: cover;
+  }
+
+  .modal-element-name {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 685px) {
+  .modal-body {
+    width: auto;
+  }
+
+  .modal-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .element-overview {
     display: none;
   }
 
-  .modal-content,
-  .custom-modal-content {
-    height: 500px;
-    width: 1300px;
+  .modal-close-button {
+    margin-right: 15px;
+    width: 30x;
+
+    right: 10px;
   }
 
-  .modal-details-header {
+  .modal-element-name {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .modal-details {
+    height: 20%;
+    display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+  }
+
+  .trailer-button {
+    width: 120px;
+  }
+
+  .custom-modal-content {
+    border-radius: 20px;
+    margin: 0;
+  }
+
+  .custom-modal .modal-dialog {
+    margin: 0;
+  }
+
+  .custom-modal {
+    padding: 0;
+    top: 80px;
+  }
+
+  .vote-rating {
+    font-size: 18px;
   }
 
   .modal-rating {
     display: none;
-  }
-  .trailer-button {
-    margin-top: 90px;
-    margin-left: 10px;
   }
 }

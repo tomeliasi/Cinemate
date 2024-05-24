@@ -5,6 +5,7 @@ import {
   getCurrentUser,
   removeFavouritesFromLocalStorage,
 } from "../services/FirebaseService";
+import {FinalList} from '../services/FinalList/FinalList'
 
 const FavouritesPage = () => {
   const [favorites, setFavorites] = useState([]);

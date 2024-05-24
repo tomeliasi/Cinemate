@@ -15,11 +15,15 @@ const ModalComponent = (props) => {
   const [playTrailer, setPlayerTrailer] = useState(false);
   const [trailerKey, setTrailerKey] = useState(null);
   const [externalIDS, setExternalIDS] = useState(null);
+   const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
+  
 
   useEffect(() => {
     const fetchTrailerKey = async () => {
       const key = await getYoutubeKey(element);
       setTrailerKey(key);
+ console.log("is mobile : ",isMobile)
+  console.log("playtrailer : ", playTrailer)
     };
     fetchTrailerKey();
   }, []);
@@ -56,6 +60,16 @@ const ModalComponent = (props) => {
     else return "series";
   };
 
+
+const handlePlayTrailer = () => {
+    if (isMobile) {
+      window.open(`https://www.youtube.com/watch?v=${trailerKey}`, "_blank");
+    } else {
+      setPlayerTrailer(true);
+    }
+  };
+
+
   return (
     <Modal
       show={show}
@@ -83,7 +97,7 @@ const ModalComponent = (props) => {
         <div className="modal-details">
           <div className="modal-details-header">
             {element?.title ? (
-              <h3>
+              <h3 className="modal-element-name">
                 {element?.title} (
                 {new Date(element?.release_date).getFullYear()})
               </h3>
@@ -93,7 +107,9 @@ const ModalComponent = (props) => {
                 {new Date(element?.first_air_date).getFullYear()}){" "}
               </h3>
             )}
-            <ExternalSocials ID={element.id} elementType={checkElementType()} />
+            <div className="external-socials-section">
+               <ExternalSocials ID={element.id} elementType={checkElementType()} />
+            </div>
           </div>
           {!playTrailer ? (
             <>
@@ -113,7 +129,7 @@ const ModalComponent = (props) => {
               <p className="element-overview">{element?.overview}</p>
               {trailerKey && (
                 <button
-                  onClick={() => setPlayerTrailer(true)}
+                  onClick={() => handlePlayTrailer()}
                   className="trailer-button"
                 >
                   Play Trailer
