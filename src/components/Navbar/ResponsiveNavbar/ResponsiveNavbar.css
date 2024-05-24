@@ -1,4 +1,10 @@
-.responsive-navbar-container {
+
+.responsive-navbar-container
+{
+    display: flex;
+}
+
+.responsive-menu-container {
   position: relative;
 }
 
@@ -54,3 +60,32 @@
   padding: 0;
   text-align: end;
 }
+
+.user-img {
+  height: 35px;
+  width: 35px;
+}
+
+.user-name {
+  text-align: center;
+  margin-left: 8px; 
+  width: 100px;
+  height: 10px;
+}
+
+.user-info-section {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  margin-left: auto; /* Push the user info section to the right */
+}
+
+
+
+@media screen and (max-width: 410px) {
+    .user-name{
+        display: none;
+    }
+}
+
+

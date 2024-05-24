@@ -13,3 +13,14 @@
 .social-icons {
   display: flex;
 }
+
+
+ @media screen and (max-width: 1200px)
+{
+ .social-img
+  {
+    width: 40px;
+    height: 40px;
+  }
+} 
+

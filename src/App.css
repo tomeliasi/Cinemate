@@ -45,3 +45,15 @@ body {
 .fav-components {
   color: white;
 }
+
+.card-list
+{
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.carousel-inner
+{
+  height: 400px;
+}

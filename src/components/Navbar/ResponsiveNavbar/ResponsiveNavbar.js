@@ -8,19 +8,31 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { UserExistCheck } from "../../../services/FirebaseService";
+import { avatarFetch } from "../../../services/UserService";
 
 import "./ResponsiveNavbar.css";
 import "../Navbar.css";
-const ResponsiveNavbar = () => {
+const ResponsiveNavbar = (props) => {
   const [openMenu, setOpenMenu] = useState(false);
+  const [openUserMenu, setOpenUserMenu] = useState(false);
 
   const showCategories = () => {
     setOpenMenu(!openMenu);
   };
 
+
   return (
-    <div>
-      <div className="responsive-navbar-container">
+    <div className="responsive-navbar-container">
+      {props.userInfo ? (
+        <div className="user-info-section">
+          <img
+            className="user-img"
+            src={avatarFetch(props.userInfo.avatar)}
+          ></img>
+          <p className="user-name"> Hello {props?.userInfo.firstName}</p>
+        </div>
+      ) : null}
+      <div className="responsive-menu-container">
         <img
           src={responsiveNabar}
           onClick={() => showCategories()}
@@ -32,7 +44,6 @@ const ResponsiveNavbar = () => {
           >
             <ul className="categories-list">
               <li>
-                {" "}
                 <Link
                   className="category"
                   to="/Movies"
@@ -42,7 +53,6 @@ const ResponsiveNavbar = () => {
                 </Link>
               </li>
               <li>
-                {" "}
                 <Link
                   className="category"
                   to="/Series"
@@ -52,7 +62,6 @@ const ResponsiveNavbar = () => {
                 </Link>
               </li>
               <li>
-                {" "}
                 <Link
                   className="category"
                   to="/About"
@@ -61,7 +70,7 @@ const ResponsiveNavbar = () => {
                   About
                 </Link>
               </li>
-              {!UserExistCheck ? (
+              {!props.user ? (
                 <>
                   <li>
                     <Link
@@ -83,16 +92,24 @@ const ResponsiveNavbar = () => {
                   </li>
                 </>
               ) : (
-                <li>
-                  {" "}
+                <>
+                  <li>
                   <Link
                     className="category"
                     to="/Favourites"
                     onClick={() => setOpenMenu(!openMenu)}
                   >
                     Favourites
-                  </Link>{" "}
+                  </Link>
                 </li>
+                <li>
+                    <Link to="/Movies" onClick={props.handleSignOut} className="
+                    category" >
+                    Logout
+                    </Link>
+                </li>
+                </>
+              
               )}
             </ul>
           </div>
