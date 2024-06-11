@@ -1,0 +1,26 @@
+.modal-details-header {
+  padding-top: 10px;
+  padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+}
+
+.modal-element-name
+{
+  margin: 0;
+}
+
+@media screen and (max-width: 685px) {
+  .modal-element-name {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .modal-element-name {
+    font-size: 20px;
+  }
+}

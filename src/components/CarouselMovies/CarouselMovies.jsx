@@ -33,7 +33,7 @@ const CarouselMovies = (props) => {
       activeIndex={index}
       onSelect={handleSelect}
       className="main-carousel"
-      interval={3500}
+      interval={3300}
       fade={true}
     >
       {props.movies?.map((movie, idx) => (

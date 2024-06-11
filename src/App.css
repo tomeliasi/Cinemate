@@ -26,8 +26,15 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "GothamFont";
+  src: url("./Fonts/./Gotham/Gotham-Bold.otf") format("otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .main-page {
-  padding-top: 100px;
+  padding-top: 90px;
   flex-wrap: nowrap;
   overflow-x: auto;
 }
@@ -44,6 +51,11 @@ body {
 
 .fav-components {
   color: white;
+}
+
+.fav-heading
+{
+  margin-left: 20px;
 }
 
 .card-list

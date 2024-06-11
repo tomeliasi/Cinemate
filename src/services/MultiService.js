@@ -182,6 +182,26 @@ const getYoutubeKey = async (element) => {
   }
 };
 
+const checkElementType = (element) => {
+    if (element.title) return "movie";
+    else return "series";
+  };
+
+// const getElementVoteAvarage = (element) =>
+//   {
+//     return ( {element?.vote_average >= 1 && (
+//                 <div className="modal-rating">
+//                   <img
+//                     src={ratingstar}
+//                     alt="Rating Star"
+//                     className="rating-star-image"
+//                   />
+//                   <div className="vote-rating">
+//                     {element?.vote_average.toFixed(1)}
+//                   </div>
+//                 </div>)
+//   }
+
 export {
   MultiSearch,
   List,
@@ -190,4 +210,5 @@ export {
   NewList,
   getElementById,
   getExternalIDS,
+  checkElementType,
 };

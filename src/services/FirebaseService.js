@@ -115,17 +115,35 @@ const addElementToFavourites = async (elementID, ElementType) => {
       let updateObj = {};
       if (ElementType === "movie") {
         updateObj = { FavouritesMovies: arrayUnion(elementID) };
-        // console.log("Movie added to favorites successfully!");
         FavouritesType = "FavouritesMovies";
       } else {
         updateObj = { FavouritesTVShows: arrayUnion(elementID) };
-        // console.log("TvShow added to favorites successfully!");
         FavouritesType = "FavouritesTVShows";
       }
+      
       await updateDoc(userDocRef, updateObj);
+
+      // Retrieve the favorites from local storage
       let favouritesFromLocalStorage = localStorage.getItem(FavouritesType);
-      favouritesFromLocalStorage = JSON.parse(favouritesFromLocalStorage);
-      favouritesFromLocalStorage.push(elementID);
+      if (favouritesFromLocalStorage) {
+        favouritesFromLocalStorage = JSON.parse(favouritesFromLocalStorage);
+      } else {
+        favouritesFromLocalStorage = [];
+      }
+
+      // Check if the retrieved item is an array
+      if (Array.isArray(favouritesFromLocalStorage)) {
+        // Push the new elementID into the array
+        favouritesFromLocalStorage.push(elementID);
+      } else {
+        // If not an array, create a new array with the elementID
+        favouritesFromLocalStorage = [elementID];
+      }
+
+      // Save the updated array back to local storage
+      localStorage.setItem(FavouritesType, JSON.stringify(favouritesFromLocalStorage));
+
+      console.log("favourites in local storage: ", favouritesFromLocalStorage);
     } catch (error) {
       console.error("Error adding element to favorites: ", error);
     }
@@ -133,6 +151,7 @@ const addElementToFavourites = async (elementID, ElementType) => {
     console.error("User not authenticated.");
   }
 };
+
 
 const deleteElementFromFavourites = async (elementID, ElementType) => {
   const user = auth.currentUser;
@@ -144,17 +163,17 @@ const deleteElementFromFavourites = async (elementID, ElementType) => {
       let updateObj = {};
       if (ElementType === "movie") {
         updateObj = { FavouritesMovies: arrayRemove(elementID) };
-        // console.log("Movie removed from favorites successfully!");
+         console.log("Movie removed from favorites successfully! ",elementID);
         FavouritesType = "FavouritesMovies";
       } else {
         updateObj = { FavouritesTVShows: arrayRemove(elementID) };
-        // console.log("TvShow removed from favorites successfully!");
+         console.log("TvShow removed from favorites successfully! ",elementID);
         FavouritesType = "FavouritesTVShows";
       }
       await updateDoc(userDocRef, updateObj);
       let favouritesFromLocalStorage = localStorage.getItem(FavouritesType);
       favouritesFromLocalStorage = JSON.parse(favouritesFromLocalStorage);
-      favouritesFromLocalStorage.remove(elementID);
+      favouritesFromLocalStorage = favouritesFromLocalStorage.filter(id => id !== elementID);
     } catch (error) {
       console.error("Error removing element to favorites: ", error);
     }
