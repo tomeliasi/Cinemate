@@ -5,32 +5,38 @@ import ratingstar from "../../../images/rating-star.png";
 import YoutubeIcon from "../../../images/youtube-icon.png";
 import "./ModalComponent.css";
 import YouTube from "react-youtube";
-import { getYoutubeKey, getExternalIDS } from "../../../services/MultiService";
-
+import {
+  getYoutubeKey,
+  getExternalIDS,
+  checkElementType,
+} from "../../../services/MultiService";
 import { ExternalSocials } from "./ExternalSocials";
+import arrowIcon from "../../../images/icons/arrow.svg";
+import { ModalHeader } from "./ModalHeader";
+import { VoteAverageComponent } from "./VoteAverageComponent";
 
 const ModalComponent = (props) => {
   const { show, handleClose, element } = props;
-  const [loading, setLoading] = useState(true);
   const [playTrailer, setPlayerTrailer] = useState(false);
   const [trailerKey, setTrailerKey] = useState(null);
   const [externalIDS, setExternalIDS] = useState(null);
-   const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
-  
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
+  const [showMoreInfo, setShowMoreInfo] = useState(false);
 
   useEffect(() => {
     const fetchTrailerKey = async () => {
       const key = await getYoutubeKey(element);
       setTrailerKey(key);
- console.log("is mobile : ",isMobile)
-  console.log("playtrailer : ", playTrailer)
     };
     fetchTrailerKey();
   }, []);
 
   useEffect(() => {
     const fetchExternalIDS = async () => {
-      const iDS = await getExternalIDS(props.element.id, checkElementType());
+      const iDS = await getExternalIDS(
+        props.element.id,
+        checkElementType(element)
+      );
       setExternalIDS(iDS);
     };
 
@@ -40,35 +46,29 @@ const ModalComponent = (props) => {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (element?.backdrop_path) {
-        setLoading(false);
-        clearInterval(interval);
-      }
-    }, 1000);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1000);
+    };
 
-    return () => clearInterval(interval);
-  }, [element?.backdrop_path]);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const modalClose = () => {
     handleClose();
     setPlayerTrailer(false);
   };
 
-  const checkElementType = () => {
-    if (element.title) return "movie";
-    else return "series";
-  };
-
-
-const handlePlayTrailer = () => {
+  const handlePlayTrailer = () => {
     if (isMobile) {
       window.open(`https://www.youtube.com/watch?v=${trailerKey}`, "_blank");
     } else {
       setPlayerTrailer(true);
     }
   };
-
 
   return (
     <Modal
@@ -95,46 +95,44 @@ const handlePlayTrailer = () => {
           </Button>
         </div>
         <div className="modal-details">
-          <div className="modal-details-header">
-            {element?.title ? (
-              <h3 className="modal-element-name">
-                {element?.title} (
-                {new Date(element?.release_date).getFullYear()})
-              </h3>
-            ) : (
-              <h3>
-                {element?.name} (
-                {new Date(element?.first_air_date).getFullYear()}){" "}
-              </h3>
-            )}
-            <div className="external-socials-section">
-               <ExternalSocials ID={element.id} elementType={checkElementType()} />
-            </div>
-          </div>
+          <ModalHeader element={element} />
           {!playTrailer ? (
             <>
-              {element?.vote_average >= 1 && (
-                <div className="modal-rating">
-                  <img
-                    src={ratingstar}
-                    alt="Rating Star"
-                    className="rating-star-image"
-                  />
-                  <div className="vote-rating">
-                    {element?.vote_average.toFixed(1)}
-                  </div>
-                </div>
+              <VoteAverageComponent element={element} />
+              {isMobile ? (
+                <>
+                  <button
+                    className="arrow-button"
+                    style={{
+                      transform: `rotate(${showMoreInfo ? 90 : 270}deg)`,
+                    }}
+                    onClick={() => setShowMoreInfo(!showMoreInfo)}
+                  >
+                    <img className="more-info-icon" src={arrowIcon} />
+                  </button>
+
+                  {showMoreInfo && (
+                    <div
+                      className={`more-info-container ${
+                        showMoreInfo ? "show" : ""
+                      }`}
+                    >
+                      <p className="element-overview">{element?.overview}</p>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <p className="element-overview">{element?.overview}</p>
               )}
 
-              <p className="element-overview">{element?.overview}</p>
               {trailerKey && (
                 <button
                   onClick={() => handlePlayTrailer()}
                   className="trailer-button"
                 >
-                  Play Trailer
+                  Watch Trailer
                   <img
-                    className="icon-button"
+                    className="trailer-icon-button"
                     src={YoutubeIcon}
                     alt="YouTube Icon"
                   />

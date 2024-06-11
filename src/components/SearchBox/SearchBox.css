@@ -1,5 +1,6 @@
 .searchbox-container {
   justify-content: center;
+  width: auto;
 }
 
 .search-input {

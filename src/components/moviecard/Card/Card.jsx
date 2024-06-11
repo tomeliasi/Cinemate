@@ -39,6 +39,12 @@ const Card = (props) => {
       addElementToFavourites(props.element.id, checkElementType());
       setFavComponent(true);
     }
+  //    else
+  //  {
+  //    deleteElementFromFavourites(props.element.id,checkElementType());
+  //    setFavComponent(false);
+  //   props.CardHandleOnClick(props.element.id)
+  //  }
   };
 
   return (
@@ -49,9 +55,11 @@ const Card = (props) => {
         className="card-poster"
         onClick={imgHandleOnClick}
       />
-      {props.favOption ? (<div className="card-overlay" onClick={() => favouritesStatus()}>
-        {favComponent ? <RemoveFavourites /> : <AddFavourites />}
-      </div>) : (null)}
+      {props.favOption ? (
+        <div className="card-overlay" onClick={() => favouritesStatus()}>
+          {favComponent ? <RemoveFavourites /> : <AddFavourites />}
+        </div>
+      ) : null}
       {showModal ? (
         <ModalComponent
           show={showModal}

@@ -4,7 +4,7 @@
   align-items: center;
   padding: 0 10px;
   width: 100%;
-  height: 10%;
+  height: 72px;
   z-index: 100;
   position: fixed;
   top: 0;
@@ -34,7 +34,7 @@
 
 .category,
 .login-category {
-  font-size: x-large;
+  font-size: 20px;
   padding: 10px 15px;
   color: white;
   text-decoration: none;
@@ -58,29 +58,25 @@
 }
 
 .user-info {
-  margin-left: 10px;
   display: flex;
-  width :400px;
+  
 }
 
 .user-button {
   display: flex;
   justify-content: center;
-  padding: 17px 10px;
-  font-family: "Gill Sans", "Gill Sans MT", "Trebuchet MS", sans-serif;
+  padding: 13px;
   border-radius: 50px;
   cursor: pointer;
   border: 0;
   background-color: hsl(261deg 80% 48%);
   box-shadow: rgb(93 24 220) 0px 2px 20px 0px;
   letter-spacing: 1px;
-  text-transform: uppercase;
   font-size: 15px;
   transition: all 0.5s ease;
   text-decoration: none;
-  margin: 10px;
+  margin: 8px;
   color: hsl(0, 0%, 100%);
-  width: 100px;
 }
 
 .user-button:hover {
@@ -88,24 +84,25 @@
 }
 
 .user-button:active {
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   background-color: hsl(261deg 80% 48%);
   color: hsl(0, 0%, 100%);
   box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
-  transform: translateY(7px);
-  transition: 100ms;
+  transform: translateY(5px);
+  transition: 10ms;
 }
 
 .username-display {
-  align-items: center;
+  text-align: center;
   font-size: larger;
-  margin: 20px;
+  margin-top: 20px;
+  padding-left: 10px;
 }
 
 .avatar-user {
   height: 50px;
   width: 50px;
-  margin-top: 10px;
+  margin-top: 7px;
 }
 
 .user-button .logout-button {

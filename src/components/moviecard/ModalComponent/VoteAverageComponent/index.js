@@ -1,0 +1,1 @@
+export {VoteAverageComponent} from './VoteAverageComponent'

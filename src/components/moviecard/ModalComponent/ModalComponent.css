@@ -4,6 +4,7 @@
   height: auto;
   background-color: transparent;
   padding: 7px;
+  position: relative;
 }
 
 .custom-modal-content {
@@ -54,8 +55,8 @@
 
 .modal-close-button {
   position: absolute;
-  left: 95%;
-  bottom: 90%;
+  right: 6px;
+  top: 6px;
 }
 
 .modal-close-button.button-styling {
@@ -68,43 +69,67 @@
   padding-left: 10px;
 }
 
-.rating-star-image {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-}
-
-.vote-rating {
-  font-size: 20px;
-}
-
 .media-player {
   display: flex;
   justify-content: center;
-  padding-top: 30px;
+  padding-top: 5px;
 }
 
-.modal-details-header {
-  padding-top: 10px;
-  padding-left: 10px;
-  display: flex;
-  height: 50px;
-  justify-content: space-between;
-  width: 95%;
+.trailer-button {
+  transition: 100ms;
+  margin-block: 10px;
+  margin-left: 5px;
+}
+
+.trailer-button.hover {
+  transform: scale(1.1);
+}
+
+.trailer-icon-button {
+  width: 20px;
+  height: 25px;
+  margin-left: 5px;
 }
 
 .element-overview {
   padding-left: 10px;
 }
 
+.arrow-button {
+  position: absolute;
+  right: 47%;
+  top: -40px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  outline: none;
+  border: none;
+  transition: transform 0.4s ease;
+}
+
+.arrow-button:focus {
+  outline: none;
+}
+
+/* Remove active state styling */
+.arrow-button:active {
+  outline: none;
+  border: none;
+}
+
+.more-info-container {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.more-info-container.show {
+  max-height: 500px;
+  transition: max-height 0.8s ease-in-out;
+}
+
 @media screen and (max-width: 1000px) {
   .modal-body {
     height: 550px;
     width: 660px;
-  }
-
-  .modal-details {
-    height: 25%;
   }
 
   .modal-img {
@@ -115,16 +140,6 @@
     font-size: small;
   }
 
-  .modal-rating {
-    .vote-rating {
-      font-size: 15px;
-    }
-
-    .rating-star-image {
-      width: 16px;
-      height: 16px;
-    }
-  }
   .trailer-button {
     margin-left: 10px;
   }
@@ -135,16 +150,8 @@
     height: 600px;
   }
 
-  .modal-close-button {
-    margin-bottom: 5px;
-  }
-
   .modal-img {
     object-fit: cover;
-  }
-
-  .modal-element-name {
-    font-size: 20px;
   }
 }
 @media screen and (max-width: 685px) {
@@ -159,32 +166,17 @@
   }
 
   .element-overview {
-    display: none;
-  }
-
-  .modal-close-button {
-    margin-right: 15px;
-    width: 30x;
-
-    right: 10px;
-  }
-
-  .modal-element-name {
-    font-size: 20px;
-    margin: 0;
-    padding: 0;
   }
 
   .modal-details {
-    height: 20%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     flex-wrap: nowrap;
   }
 
   .trailer-button {
-    width: 120px;
+    width: 140px;
+    bottom: 0;
   }
 
   .custom-modal-content {
@@ -199,13 +191,5 @@
   .custom-modal {
     padding: 0;
     top: 80px;
-  }
-
-  .vote-rating {
-    font-size: 18px;
-  }
-
-  .modal-rating {
-    display: none;
   }
 }

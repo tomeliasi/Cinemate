@@ -27,7 +27,7 @@ const Navbar = ({ user }) => {
   const navigate = useNavigate("");
   const [searchInput, setSearchInput] = useState("");
   const [userShowModal, setUserShowModal] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1100);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
 
   const openModal = () => {
     setUserShowModal(true);
@@ -78,7 +78,7 @@ const Navbar = ({ user }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 930);
+      setIsMobile(window.innerWidth < 1000);
     };
 
     window.addEventListener("resize", handleResize);
@@ -119,7 +119,7 @@ const Navbar = ({ user }) => {
                   src={avatarFetch(userInfo.avatar)}
                 ></img>
                 <p className="username-display">
-                  Hello {userInfo.firstName} {userInfo.lastName}
+                  Hello {userInfo.firstName}
                 </p>
                 <button
                   className="user-button logout-button"
@@ -141,13 +141,13 @@ const Navbar = ({ user }) => {
           </div>
         </>
       )}
-      {userShowModal && userInfo && (
+      {/* {userShowModal && userInfo && (
         <UserDialog
           showModal={userShowModal}
           handleClose={closeModal}
           user={userInfo}
         />
-      )}
+      )} */}
     </nav>
   );
 };

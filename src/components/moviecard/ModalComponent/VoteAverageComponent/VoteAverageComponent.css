@@ -1,0 +1,37 @@
+.modal-rating {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.rating-star-image {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.vote-rating {
+  font-size: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+  .modal-rating {
+    .vote-rating {
+      font-size: 15px;
+    }
+
+    .rating-star-image {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 685px) {
+  .vote-rating {
+    font-size: 18px;
+  }
+
+  .modal-rating {
+  }
+}

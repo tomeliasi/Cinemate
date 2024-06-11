@@ -4,8 +4,9 @@ import { ListHeader } from "../components/ListHeader";
 import {
   getCurrentUser,
   removeFavouritesFromLocalStorage,
+  deleteElementFromFavourites,
 } from "../services/FirebaseService";
-import {FinalList} from '../services/FinalList/FinalList'
+import { FinalList } from "../services/FinalList/FinalList";
 
 const FavouritesPage = () => {
   const [favorites, setFavorites] = useState([]);
@@ -44,15 +45,19 @@ const FavouritesPage = () => {
     fetchFavorites();
   }, []);
 
+  // const removeElementOption = () => {
+  //   setFavorites((favorites) => favorites.filter((_, index) => index !== 0));
+  // };
+
   return (
     <div className="main-page">
       {favorites.length > 0 ? (
         <div>
           <h3 className="fav-heading">Your Favorites</h3>
-          <List
+          <FinalList
             elements={favorites}
             isFavourite={true}
-            handleOnClick={removeFavouritesFromLocalStorage}
+            // handleOnClick={removeElementOption}
           />
         </div>
       ) : (
